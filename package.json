@@ -1,0 +1,30 @@
+{
+  "name": "artopia-3",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n SERVER,WEB -c blue,magenta \"npm:server\" \"npm:client\"",
+    "server": "node --watch server/index.js",
+    "client": "vite",
+    "build": "vite build",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "gsap": "^3.15.1",
+    "helmet": "^8.3.0",
+    "mongoose": "^9.12.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.2.1",
+    "concurrently": "^10.0.7",
+    "vite": "^8.3.6"
+  }
+}
