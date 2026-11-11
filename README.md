@@ -45,4 +45,10 @@ Set `ADMIN_KEY` in `.env`, then open (while the server runs):
     npm run build
     npm start        # serves the website + API together on http://localhost:5001
 Host it on Render / Railway (Node service). Set the same variables from `.env` in their dashboard.
-Then in Atlas Network Access allow the host's IP (or 0.0.0.0/0).
+Then configure Atlas Network Access for the hosting provider's egress; avoid `0.0.0.0/0` where possible.
+
+## Deploy to Vercel
+- Import this project folder as the Vercel project root. `vercel.json` builds the Vite site to `dist`; the `api/` handlers expose the registration API.
+- In Vercel Project Settings → Environment Variables, add `MONGODB_URI` (required) and `REGISTRATION_OPEN` (`true` or `false`). Add `ADMIN_KEY` only if you need the private registration export endpoint.
+- Keep `.env` local; never commit it or paste its values into chat. If MongoDB Atlas uses an IP access list, configure it to accept the Vercel function's connections.
+- The WhatsApp group and QR, gallery photos, and Kaleidos logo are included in the site build.
