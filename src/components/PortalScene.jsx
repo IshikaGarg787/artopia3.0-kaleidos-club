@@ -24,7 +24,7 @@ export default function PortalScene({ heroRef, onFallback }) {
       cam.position.z = 7;
       const group = new THREE.Group(); scene.add(group);
 
-      const cols = [0x526a43, 0xc3a65e, 0x96a173, 0x26392a, 0x526a43, 0x96a173, 0xc3a65e];
+      const cols = [0xE62429, 0xF5B942, 0x38BDF8, 0x8B5CF6, 0xE62429, 0x38BDF8, 0xF5B942];
       const rings = cols.map((c, i) => {
         const m = new THREE.Mesh(
           new THREE.TorusGeometry(1.3 + i * 0.42, i % 2 ? 0.012 : 0.026, 6, MOBILE ? 120 : 220),
@@ -49,7 +49,7 @@ export default function PortalScene({ heroRef, onFallback }) {
 
       const c2 = document.createElement('canvas'); c2.width = c2.height = 128;
       const x = c2.getContext('2d'), gr = x.createRadialGradient(64, 64, 0, 64, 64, 64);
-      gr.addColorStop(0, 'rgba(230,214,157,.84)'); gr.addColorStop(0.2, 'rgba(117,143,87,.38)'); gr.addColorStop(0.58, 'rgba(43,75,50,.2)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+      gr.addColorStop(0, 'rgba(255,220,140,.95)'); gr.addColorStop(0.25, 'rgba(230,36,41,.5)'); gr.addColorStop(0.6, 'rgba(139,92,246,.2)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
       x.fillStyle = gr; x.fillRect(0, 0, 128, 128);
       const tex = new THREE.CanvasTexture(c2); tex.colorSpace = THREE.SRGBColorSpace;
       const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false }));
@@ -60,10 +60,6 @@ export default function PortalScene({ heroRef, onFallback }) {
         const w = hero.clientWidth, h = hero.clientHeight;
         renderer.setSize(w, h, false); cam.aspect = w / h;
         cam.position.z = w / h < 0.8 ? 11 : w / h < 1.2 ? 8.5 : 7;
-        const portalX = w / h < 0.8 ? 0.25 : w / h < 1.15 ? 1.05 : 1.9;
-        group.position.x = portalX;
-        group.scale.setScalar(w / h < 0.8 ? 0.76 : 1);
-        glow.position.x = portalX;
         cam.setViewOffset(w, h, 0, h * 0.1, w, h); cam.updateProjectionMatrix();
         renderer.render(scene, cam);
       };

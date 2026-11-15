@@ -9,8 +9,8 @@ export default function FinalCta() {
   return (
     <section className="final" id="join" aria-labelledby="fin-h">
       <div className="fp" aria-hidden="true">
-        <i style={{ '--k': 0, '--c': '#344633', '--t': '60s' }} /><i style={{ '--k': 9, '--c': '#66764b', '--t': '34s' }} />
-        <i style={{ '--k': 19, '--c': '#a7ae7e', '--t': '26s' }} /><i style={{ '--k': 30, '--c': '#c7a95e', '--t': '20s' }} /><u />
+        <i style={{ '--k': 0, '--c': '#8B5CF6', '--t': '60s' }} /><i style={{ '--k': 9, '--c': '#E62429', '--t': '34s' }} />
+        <i style={{ '--k': 19, '--c': '#38BDF8', '--t': '26s' }} /><i style={{ '--k': 30, '--c': '#F5B942', '--t': '20s' }} /><u />
       </div>
       <div className="wrap">
         <p className="tag rv">LAST CALL</p>

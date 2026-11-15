@@ -5,7 +5,7 @@ import Val from '../Val.jsx';
 export default function Briefing() {
   const D = CONFIG.details;
   const panels = [
-    ['Date', D.date], ['Start time', D.time], ['Venue', [D.venueExact, D.venue].filter(Boolean).join(', ')],
+    ['Date', D.date], ['Time', D.time], ['Venue', [D.venueExact, D.venue].filter(Boolean).join(', ')],
     ['Registration deadline', D.deadline], ['Eligibility', D.eligibility], ['Participation format', D.format], ['Entry fee', D.fee],
   ];
   return (

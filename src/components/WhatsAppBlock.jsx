@@ -7,7 +7,8 @@ export default function WhatsAppBlock() {
     <div className="wa">
       <p className="wa-note">
         <span aria-hidden="true">📌 </span>
-        <b>Next step: join the Artopia 3.0 WhatsApp group</b> for event updates, instructions, and announcements.
+        All participants of <b>Artopia 3.0</b> are required to join the following WhatsApp Group to receive important
+        updates, instructions, and announcements regarding the event.
       </p>
       <div className="wa-qr">
         {qrImage ? (

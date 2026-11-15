@@ -10,7 +10,7 @@ export const CONFIG = {
     // "open" | "soon" | "closed"  ("closed" disables every Register button)
     status: 'open',
     // Optional extra line next to the status, e.g. "Closes 20 Nov". "" hides it.
-    announcement: 'Closes 24 November 2026',
+    announcement: '',
     // WhatsApp group shown inside the registration form and on the success screen.
     whatsapp: {
       qrImage: '/images/whatsapp-qr.png',
@@ -22,13 +22,13 @@ export const CONFIG = {
   // Leave a value as '' to display "To be announced".
   details: {
     date: '25 November 2026',
-    time: '11:00 AM',
+    time: '[INSERT START AND END TIME]',
     venue: 'GLA University, Mathura',
-    venueExact: 'Ninad Ground',
-    deadline: '24 November 2026 (before event day)',
-    eligibility: 'College students only. Students from any college or university may participate.',
+    venueExact: 'KC Ground',
+    deadline: '[INSERT DEADLINE]',
+    eligibility: '[INSERT ELIGIBILITY]',
     format: '[INSERT PARTICIPATION FORMAT]',
-    fee: '₹49 per participant',
+    fee: '[INSERT CONFIRMED FEE]',
     competition: '[INSERT COMPETITION DETAILS — rules, themes, categories, judging]',
   },
 
@@ -41,13 +41,13 @@ export const CONFIG = {
   // ---- 4. EXPERIENCES (proposed categories) -------------------------------
   // art: painting | trophy | frame | nodes | stall      link: '' hides the link
   experiences: [
-    { kind: 'UNIVERSE 01', title: 'Live Art & Painting', art: 'painting', accent: '#66764b', link: '',
+    { kind: 'UNIVERSE 01', title: 'Live Art & Painting', art: 'painting', accent: '#E62429', link: '',
       desc: 'Canvases, colours and creators in one place. Watch ideas take shape in real time.' },
-    { kind: 'UNIVERSE 02', title: 'Creative Competitions', art: 'trophy', accent: '#c7a95e', link: '',
+    { kind: 'UNIVERSE 02', title: 'Creative Competitions', art: 'trophy', accent: '#F5B942', link: '',
       desc: 'Bring your style and measure it against artists from other colleges.' },
-    { kind: 'UNIVERSE 03', title: 'Art Exhibitions', art: 'frame', accent: '#a7ae7e', link: '',
+    { kind: 'UNIVERSE 03', title: 'Art Exhibitions', art: 'frame', accent: '#38BDF8', link: '',
       desc: 'Walk through a gallery of work from many perspectives, hung and lit like it matters.' },
-    { kind: 'UNIVERSE 04', title: 'Interactive Art Experiences', art: 'nodes', accent: '#344633', link: '',
+    { kind: 'UNIVERSE 04', title: 'Interactive Art Experiences', art: 'nodes', accent: '#8B5CF6', link: '',
       desc: 'Step into pieces you can touch, change and add to. Art that answers back.' },
     { kind: 'UNIVERSE 05', title: 'Campus Stalls & Discoveries', art: 'stall', accent: '#FF7A3D', link: '',
       desc: 'Browse stalls, find small treasures and meet makers across the campus.' },
@@ -55,12 +55,12 @@ export const CONFIG = {
 
   // ---- 5. WHY ATTEND -------------------------------------------------------
   whyAttend: [
-    { c: '#66764b', t: 'Showcase your creativity', d: 'Put your work in front of people who came to look at art.' },
-    { c: '#c7a95e', t: 'Compete with artists from other colleges', d: 'See how your style stacks up against fresh perspectives.' },
-    { c: '#a7ae7e', t: 'Discover different art styles', d: 'Every campus brings its own voice. Hear a few new ones.' },
-    { c: '#344633', t: 'Explore the exhibition and stalls', d: "Wander the campus and find something you didn't expect." },
-    { c: '#66764b', t: 'Connect with a creative community', d: 'Meet people who also draw on the margins of their notebooks.' },
-    { c: '#c7a95e', t: 'Feel the multiverse atmosphere', d: 'A Marvel-inspired setting that turns the campus into another dimension.' },
+    { c: '#E62429', t: 'Showcase your creativity', d: 'Put your work in front of people who came to look at art.' },
+    { c: '#F5B942', t: 'Compete with artists from other colleges', d: 'See how your style stacks up against fresh perspectives.' },
+    { c: '#38BDF8', t: 'Discover different art styles', d: 'Every campus brings its own voice. Hear a few new ones.' },
+    { c: '#8B5CF6', t: 'Explore the exhibition and stalls', d: "Wander the campus and find something you didn't expect." },
+    { c: '#E62429', t: 'Connect with a creative community', d: 'Meet people who also draw on the margins of their notebooks.' },
+    { c: '#F5B942', t: 'Feel the multiverse atmosphere', d: 'A Marvel-inspired setting that turns the campus into another dimension.' },
   ],
 
   // ---- 6. ARTOPIA 2.0 GALLERY ----------------------------------------------
@@ -80,13 +80,13 @@ export const CONFIG = {
   },
 
   // ---- 7. TIMELINE (structure only — confirm before launch) ------------------
-  timelineNote: 'A day of art, ideas, and shared discoveries—from registration to the closing ceremony.',
+  timelineNote: 'This schedule is a placeholder structure. Final timings will be confirmed by the organizers.',
   timeline: [
-    { title: 'Registration closes', desc: 'Complete your registration before event day to secure your place.' },
-    { title: 'Event inauguration', desc: 'The portal opens and Artopia 3.0 begins.' },
-    { title: 'Competition sessions', desc: 'Creative competitions run through the day.' },
-    { title: 'Exhibition and stall exploration', desc: 'Explore the exhibits and stalls around campus.' },
-    { title: 'Closing ceremony', desc: 'Wrap-up and a last look at the day.' },
+    { time: '[TIME TBA]', title: 'Registrations open', desc: 'Fill in the registration form to secure your place.' },
+    { time: '[TIME TBA]', title: 'Event inauguration', desc: 'The portal opens and Artopia 3.0 begins.' },
+    { time: '[TIME TBA]', title: 'Competition sessions', desc: 'Creative competitions run through the day.' },
+    { time: '[TIME TBA]', title: 'Exhibition and stall exploration', desc: 'Explore the exhibits and stalls around campus.' },
+    { time: '[TIME TBA]', title: 'Closing ceremony', desc: 'Wrap-up and a last look at the day.' },
   ],
 
   // ---- 8. COORDINATORS --------------------------------------------------------
@@ -101,15 +101,14 @@ export const CONFIG = {
   social: { instagram: 'https://www.instagram.com/kaleidos.glau?srtk=bzh2bnN0bmhvYWR5', youtube: '', linkedin: '', facebook: '' },
 
   // ---- 10. FAQ ------------------------------------------------------------------
-  faqFallback: 'Please contact the event organizers for more information.',
+  faqFallback: 'Please refer to the registration form or contact the organizers for confirmation.',
   faq: [
-    { q: 'Who can participate?', a: 'College students only. Students from any college or university may participate.' },
+    { q: 'Who can participate?', a: '' },
     { q: 'How do I register?', a: 'Tap any “Register now” button on this page, fill in the form and submit. You will see a confirmation with your registration ID.' },
-    { q: 'Is there a registration fee?', a: 'The registration fee is ₹49 per participant.' },
-    { q: 'Can students from other colleges attend?', a: 'Yes. College students from any college or university may participate.' },
-    { q: 'When is the registration deadline?', a: 'Registration closes on 24 November 2026, before the event day.' },
-    { q: 'What should participants bring?', a: 'Bring your college ID. Any additional materials will be announced by the organizers.' },
-    { q: 'Where and when is the event?', a: 'Ninad Ground, GLA University, Mathura, on 25 November 2026. The event starts at 11:00 AM.' },
+    { q: 'Is there a registration fee?', a: '' },
+    { q: 'Can students from other colleges attend?', a: 'Artopia brings together creative minds from different colleges. For specific eligibility, please contact the organizers.' },
+    { q: 'What should participants bring?', a: '' },
+    { q: 'Where and when is the event?', a: '' },
     { q: 'Who can I contact for help?', a: '' },
   ],
 };

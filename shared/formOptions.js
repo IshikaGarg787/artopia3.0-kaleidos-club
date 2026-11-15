@@ -3,6 +3,9 @@
 // Because both use this one file, the rules can never get out of sync.
 // ============================================================================
 
+// Only emails ending with this domain are accepted. Use '' to accept ANY email.
+export const EMAIL_DOMAIN = 'gla.ac.in';
+
 export const YEARS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 
 // "What are you interested in?" (optional). Keep in sync with the experience titles you like.
@@ -17,9 +20,7 @@ export const INTERESTS = [
 const clean = (v) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim() : '');
 const uniq = (arr) => [...new Set(arr)];
 const quote = (chars) => uniq(chars).slice(0, 5).map((c) => (c === ' ' ? '(space)' : `"${c}"`)).join(', ');
-const example = () => 'student@yourcollege.edu';
-export const normalizeCollegeKey = (value) =>
-  typeof value === 'string' ? value.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim() : '';
+const example = () => `your_name@${EMAIL_DOMAIN || 'college.ac.in'}`;
 
 /**
  * Checks + cleans the form data. Returns { values, errors }.
@@ -41,17 +42,6 @@ export function validateRegistration(input) {
     else if (!/^\p{L}/u.test(fullName)) errors.fullName = 'Name must start with a letter.';
     else if (fullName.length < 2) errors.fullName = `Name is too short (${fullName.length} character). Enter your full name.`;
     else if (fullName.length > 80) errors.fullName = `Name is too long (${fullName.length} characters). The maximum is 80.`;
-  }
-
-  // ---- College / university
-  const collegeName = clean(src.collegeName);
-  const collegeKey = normalizeCollegeKey(collegeName);
-  if (!collegeName) errors.collegeName = 'College name is empty. Enter the name of your college or university.';
-  else {
-    const bad = [...collegeName].filter((c) => !/[\p{L}\p{N}\s.,&'()/-]/u.test(c));
-    if (bad.length) errors.collegeName = `College name contains characters that aren't allowed: ${quote(bad)}.`;
-    else if (collegeName.length < 2) errors.collegeName = 'College name is too short. Please enter the full name.';
-    else if (collegeName.length > 120) errors.collegeName = `College name is too long (${collegeName.length} characters). The maximum is 120.`;
   }
 
   // ---- Roll number
@@ -92,7 +82,7 @@ export function validateRegistration(input) {
 
   // ---- Email
   const email = clean(src.email).toLowerCase();
-  if (!email) errors.email = `Email is empty. Enter your college or university email address, e.g. ${example()}.`;
+  if (!email) errors.email = `Email is empty. Enter your official university email, e.g. ${example()}.`;
   else if (/\s/.test(email)) errors.email = "Email can't contain spaces. Remove them and try again.";
   else if (!email.includes('@')) errors.email = `Email is missing the "@" symbol. It should look like ${example()}.`;
   else if (email.split('@').length > 2) errors.email = 'Email has more than one "@" symbol. Please check it.';
@@ -101,9 +91,11 @@ export function validateRegistration(input) {
     const badLocal = [...local].filter((c) => !/[a-z0-9._%+-]/.test(c));
     if (!local) errors.email = 'Email has nothing before the "@". Type your name or ID first, e.g. ' + example() + '.';
     else if (badLocal.length) errors.email = `Email contains characters that aren't allowed before the "@": ${quote(badLocal)}.`;
-    else if (!domain) errors.email = `Email has nothing after the "@". Enter a valid address like ${example()}.`;
-    else if (!/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(domain)) errors.email = `"${domain}" isn't a valid email domain. Enter a valid address like ${example()}.`;
+    else if (!domain) errors.email = `Email has nothing after the "@". It should end with @${EMAIL_DOMAIN || 'college.ac.in'}.`;
+    else if (!/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(domain)) errors.email = `"${domain}" isn't a valid email domain. It should look like ${EMAIL_DOMAIN || 'college.ac.in'}.`;
     else if (email.length > 120) errors.email = `Email is too long (${email.length} characters). The maximum is 120.`;
+    else if (EMAIL_DOMAIN && !(domain === EMAIL_DOMAIN || domain.endsWith('.' + EMAIL_DOMAIN)))
+      errors.email = `@${domain} is not accepted. Use your official university email ending with @${EMAIL_DOMAIN} (personal emails like Gmail or Yahoo can't be used).`;
   }
 
   // ---- Interests (optional)
@@ -117,8 +109,11 @@ export function validateRegistration(input) {
     }
   }
 
+  // ---- WhatsApp group confirmation
+  if (src.agreeWhatsapp !== true) errors.agreeWhatsapp = 'Please tick the checkbox to confirm you will join the Artopia 3.0 WhatsApp group.';
+
   return {
-    values: { fullName, collegeName, collegeKey, rollNumber, courseBranch, currentYear, whatsapp, email, interests },
+    values: { fullName, rollNumber, courseBranch, currentYear, whatsapp, email, interests, agreedToWhatsappGroup: true },
     errors,
   };
 }
