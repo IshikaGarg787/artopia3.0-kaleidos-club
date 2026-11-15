@@ -9,7 +9,7 @@ export default function Venue() {
       <div className="wrap sec">
         <div className="v-card rv" style={{ maxWidth: 760 }}>
           <p className="big">{D.venueExact},<br />{D.venue}</p>
-          <p><Val v={D.date} /> · <Val v={D.time} /></p>
+          <p><Val v={D.date} /> · Starts at <Val v={D.time} /></p>
         </div>
       </div>
     </section>

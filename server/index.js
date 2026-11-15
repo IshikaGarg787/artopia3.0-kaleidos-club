@@ -2,6 +2,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import Registration from './models/Registration.js';
 import { createApp } from './app.js';
+import { initRegistrationIndexes } from './registrationIndexes.js';
 
 const { MONGODB_URI, PORT = 5001 } = process.env;
 
@@ -12,7 +13,7 @@ if (!MONGODB_URI) {
 
 try {
   await mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 10000 });
-  await Registration.init(); // makes sure the "unique" indexes exist
+  await initRegistrationIndexes(Registration);
   console.log('✅ Connected to MongoDB Atlas');
 } catch (err) {
   console.error('\n❌ Could not connect to MongoDB Atlas:', err.message);

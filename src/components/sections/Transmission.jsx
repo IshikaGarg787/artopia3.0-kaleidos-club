@@ -19,9 +19,9 @@ export default function Transmission() {
   const row = WORDS.map((w) => <span key={w}>{w}</span>);
   return (
     <section className="trans" id="event" aria-labelledby="t-h">
-      <div className="shard" ref={(el) => (shards.current[0] = el)} style={{ left: '6%', top: '12%' }} data-speed=".08" aria-hidden="true"><i style={{ '--s': '70px', '--c': '#E62429', '--r': '20deg' }} /></div>
-      <div className="shard" ref={(el) => (shards.current[1] = el)} style={{ right: '8%', top: '22%' }} data-speed="-.1" aria-hidden="true"><i style={{ '--s': '110px', '--c': '#38BDF8', '--r': '-30deg' }} /></div>
-      <div className="shard" ref={(el) => (shards.current[2] = el)} style={{ right: '30%', bottom: '18%' }} data-speed=".14" aria-hidden="true"><i style={{ '--s': '50px', '--c': '#F5B942', '--r': '60deg' }} /></div>
+      <div className="shard" ref={(el) => (shards.current[0] = el)} style={{ left: '6%', top: '12%' }} data-speed=".08" aria-hidden="true"><i style={{ '--s': '70px', '--c': '#66764b', '--r': '20deg' }} /></div>
+      <div className="shard" ref={(el) => (shards.current[1] = el)} style={{ right: '8%', top: '22%' }} data-speed="-.1" aria-hidden="true"><i style={{ '--s': '110px', '--c': '#a7ae7e', '--r': '-30deg' }} /></div>
+      <div className="shard" ref={(el) => (shards.current[2] = el)} style={{ right: '30%', bottom: '18%' }} data-speed=".14" aria-hidden="true"><i style={{ '--s': '50px', '--c': '#c7a95e', '--r': '60deg' }} /></div>
       <div className="grid3d" aria-hidden="true" />
       <div className="wrap sec">
         <div className="trans-grid">

@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { validateRegistration } from '../shared/formOptions.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const FIELD_LABEL = { rollNumber: 'University Roll Number', email: 'email address' };
+const FIELD_LABEL = { rollNumber: 'roll number at this college', email: 'email address' };
 
 function makeRegistrationId() {
   // e.g. ART3-7K2M9Q  (no confusing characters like 0/O or 1/I)
@@ -68,10 +68,10 @@ export function createApp({ Registration, env = process.env }) {
         message: `This ${FIELD_LABEL[field]} is already registered for Artopia 3.0. If you think this is a mistake, please contact the organizers.`,
       });
 
-      const existing = await Registration.findOne({ $or: [{ rollNumber: values.rollNumber }, { email: values.email }] })
+      const existing = await Registration.findOne({ $or: [{ collegeKey: values.collegeKey, rollNumber: values.rollNumber }, { email: values.email }] })
         .select('rollNumber email')
         .lean();
-      if (existing) return res.status(409).json(dupMessage(existing.rollNumber === values.rollNumber ? 'rollNumber' : 'email'));
+      if (existing) return res.status(409).json(dupMessage(existing.email === values.email ? 'email' : 'rollNumber'));
 
       let doc;
       for (let attempt = 0; attempt < 3 && !doc; attempt++) {
@@ -80,7 +80,8 @@ export function createApp({ Registration, env = process.env }) {
         } catch (err) {
           if (err && err.code === 11000) {
             const key = Object.keys(err.keyPattern || err.keyValue || {})[0];
-            if (key === 'rollNumber' || key === 'email') return res.status(409).json(dupMessage(key));
+            if (key === 'rollNumber' || key === 'collegeKey') return res.status(409).json(dupMessage('rollNumber'));
+            if (key === 'email') return res.status(409).json(dupMessage(key));
             if (key === 'registrationId') continue; // extremely rare: pick a new ID
           }
           throw err;
@@ -113,7 +114,7 @@ export function createApp({ Registration, env = process.env }) {
 
     const rows = await Registration.find().sort({ createdAt: 1 }).lean();
     if (req.query.format === 'csv') {
-      const cols = ['registrationId', 'fullName', 'rollNumber', 'courseBranch', 'currentYear', 'whatsapp', 'email', 'interests', 'createdAt'];
+      const cols = ['registrationId', 'fullName', 'collegeName', 'rollNumber', 'courseBranch', 'currentYear', 'whatsapp', 'email', 'interests', 'createdAt'];
       const csv = [cols.join(','), ...rows.map((r) => cols.map((c) => csvCell(r[c])).join(','))].join('\n');
       res.set({ 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="artopia3-registrations.csv"' });
       return res.send('\uFEFF' + csv);

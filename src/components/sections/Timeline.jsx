@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { CONFIG } from '../../config/eventConfig.js';
 import SplitHeading from '../SplitHeading.jsx';
 import { useScrollRaf } from '../../hooks/useScrollRaf.js';
-import { clamp, isPH } from '../../lib/env.js';
+import { clamp } from '../../lib/env.js';
 
 export default function Timeline() {
   const tl = useRef(null);
@@ -21,7 +21,6 @@ export default function Timeline() {
         <ol className="tl" ref={tl} style={{ listStyle: 'none', marginBottom: 0 }}>
           {CONFIG.timeline.map((t) => (
             <li className="tl-item" key={t.title}>
-              <span className="tl-time">{isPH(t.time) ? <span className="ph">{t.time}</span> : t.time || 'Time to be announced'}</span>
               <h3>{t.title}</h3><p>{t.desc}</p>
             </li>
           ))}

@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { EMAIL_DOMAIN, INTERESTS, YEARS, validateRegistration } from '../../shared/formOptions.js';
+import { INTERESTS, YEARS, validateRegistration } from '../../shared/formOptions.js';
 import { submitRegistration } from '../lib/api.js';
 import WhatsAppBlock from './WhatsAppBlock.jsx';
 
 const LABELS = {
-  fullName: 'Full Name', rollNumber: 'University Roll Number', courseBranch: 'Course and Branch', currentYear: 'Current Year',
-  whatsapp: 'WhatsApp Number', email: 'Official University Email ID', interests: 'Interests', agreeWhatsapp: 'WhatsApp group confirmation',
+  fullName: 'Full Name', collegeName: 'College / University Name', rollNumber: 'Roll Number at this College', courseBranch: 'Course and Branch', currentYear: 'Current Year',
+  whatsapp: 'WhatsApp Number', email: 'Official College / University Email ID', interests: 'Interests',
 };
 const ORDER = Object.keys(LABELS);
 const toItems = (errs) => ORDER.filter((k) => errs[k]).map((k) => ({ name: k, label: LABELS[k], msg: errs[k] }));
 
-const EMPTY = { fullName: '', rollNumber: '', courseBranch: '', currentYear: '', whatsapp: '', email: '', interests: [], agreeWhatsapp: false, website: '' };
+const EMPTY = { fullName: '', collegeName: '', rollNumber: '', courseBranch: '', currentYear: '', whatsapp: '', email: '', interests: [], website: '' };
 
 function Field({ id, label, required = true, hint, error, children }) {
   return (
@@ -75,7 +75,6 @@ export default function RegistrationModal({ onClose }) {
     if (banner && banner.kind === 'duplicate') setBanner(null);
   };
   const onBlurField = (name) => {
-    if (name === 'agreeWhatsapp') return;
     const msg = validateRegistration(values).errors[name];
     setErrors((e) => { const n = { ...e }; if (msg && values[name] !== '') n[name] = msg; else delete n[name]; return n; });
   };
@@ -179,6 +178,10 @@ export default function RegistrationModal({ onClose }) {
               <input {...a11y('fullName')} type="text" name="fullName" autoComplete="name" maxLength={80} value={values.fullName} onChange={(e) => setField('fullName', e.target.value)} placeholder="Your full name" />
             </Field>
 
+            <Field id="rf-collegeName" label="College / University Name" error={errors.collegeName}>
+              <input {...a11y('collegeName')} type="text" name="collegeName" autoComplete="organization" maxLength={120} value={values.collegeName} onChange={(e) => setField('collegeName', e.target.value)} placeholder="Your college or university" />
+            </Field>
+
             <Field id="rf-rollNumber" label="University Roll Number" hint="Please enter accurately" error={errors.rollNumber}>
               <input {...a11y('rollNumber')} type="text" name="rollNumber" autoComplete="off" autoCapitalize="characters" maxLength={20} value={values.rollNumber} onChange={(e) => setField('rollNumber', e.target.value)} placeholder="Your university roll no" />
             </Field>
@@ -198,8 +201,8 @@ export default function RegistrationModal({ onClose }) {
               <input {...a11y('whatsapp')} type="tel" name="whatsapp" inputMode="tel" autoComplete="tel-national" maxLength={16} value={values.whatsapp} onChange={(e) => setField('whatsapp', e.target.value)} placeholder="10-digit mobile number" />
             </Field>
 
-            <Field id="rf-email" label="Official University Email ID" hint={EMAIL_DOMAIN ? `e.g., your_name@${EMAIL_DOMAIN}` : 'e.g., your_name@college.ac.in'} error={errors.email}>
-              <input {...a11y('email')} type="email" name="email" autoComplete="email" maxLength={120} value={values.email} onChange={(e) => setField('email', e.target.value)} placeholder={EMAIL_DOMAIN ? `your_name@${EMAIL_DOMAIN}` : 'your_name@college.ac.in'} />
+            <Field id="rf-email" label="Official College / University Email ID" hint="Use your institution email address. Any valid college or university domain is accepted." error={errors.email}>
+              <input {...a11y('email')} type="email" name="email" autoComplete="email" maxLength={120} value={values.email} onChange={(e) => setField('email', e.target.value)} placeholder="student@yourcollege.edu" />
             </Field>
 
             <fieldset className="fld interests">
@@ -214,20 +217,6 @@ export default function RegistrationModal({ onClose }) {
               </div>
               {errors.interests && <p className="err" role="alert">{errors.interests}</p>}
             </fieldset>
-
-            <WhatsAppBlock />
-            <div className={'fld' + (errors.agreeWhatsapp ? ' has-err' : '')}>
-              <label className="agree" htmlFor="rf-agreeWhatsapp">
-                <input
-                  id="rf-agreeWhatsapp" type="checkbox" checked={values.agreeWhatsapp}
-                  aria-invalid={errors.agreeWhatsapp ? 'true' : undefined}
-                  aria-describedby={errors.agreeWhatsapp ? 'rf-agreeWhatsapp-e' : undefined}
-                  onChange={(e) => setField('agreeWhatsapp', e.target.checked)}
-                />
-                <span>I understand I must join the Artopia 3.0 WhatsApp group for event updates. <span className="req" aria-hidden="true">*</span></span>
-              </label>
-              {errors.agreeWhatsapp && <p className="err" id="rf-agreeWhatsapp-e" role="alert">{errors.agreeWhatsapp}</p>}
-            </div>
 
             {/* honeypot: hidden from people, bots fill it in */}
             <div className="hp" aria-hidden="true">

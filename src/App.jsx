@@ -21,7 +21,7 @@ import { usePointerFx } from './hooks/usePointerFx.js';
 import { RM } from './lib/env.js';
 
 // The intro plays once per browser session, and never with reduced motion.
-const seen = (() => { try { return !!sessionStorage.getItem('artopia3-intro'); } catch { return false; } })();
+const seen = (() => { try { return !!sessionStorage.getItem('artopia3-intro-v8'); } catch { return false; } })();
 const SKIP_INTRO = RM || seen;
 
 export default function App() {
