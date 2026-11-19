@@ -87,6 +87,7 @@ html.js .rv-clip.in{clip-path:inset(0 0 0 0)}
 .brand b{font-weight:400;color:var(--gold)}
 .brand i{font-style:normal;color:var(--red);font-family:var(--comic)}
 .mark{width:52px;height:52px;flex:none;object-fit:contain}
+.gla-mark{width:68px;height:52px;flex:none;object-fit:contain;background:#fff;border-radius:2px;padding:2px}
 .nav-links{position:relative;display:none;gap:4px}
 .nav-links a{display:block;padding:.7em 1em;text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);transition:color .2s}
 .nav-links a:hover,.nav-links a.on{color:#fff}
@@ -425,7 +426,6 @@ body.lock{overflow:hidden}
 .payment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
 .payment-card{min-width:0;padding:12px;display:grid;justify-items:center;gap:10px;text-align:center;border:1px solid rgba(245,185,66,.45);background:rgba(245,185,66,.05)}
 .payment-card img{width:100%;max-width:240px;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:4px}
-.payment-card b{font-size:.84rem;color:var(--gold)}
 .hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
 .rsubmit{width:100%;margin-top:26px;font-size:1.25rem}
 .spin{width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spn .7s linear infinite;display:inline-block}

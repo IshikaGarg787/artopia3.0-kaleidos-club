@@ -17,7 +17,7 @@ export default function Footer() {
               <img src="/images/kaleidos-logo.png" alt="Kaleidos Fine Arts Club logo" loading="lazy" />
               <p className="big">Artopia <span style={{ color: 'var(--gold)' }}>3.0</span></p>
             </div>
-            <p style={{ color: 'var(--mut)', marginTop: 10 }}>The Marvel Multiverse Edition<br />KALEIDOS — Fine Arts Club<br />GLA University, Mathura</p>
+            <p style={{ color: 'var(--mut)', marginTop: 10 }}>The Marvel Multiverse Edition<br />KALEIDOS — Fine Arts Club</p>
           </div>
           <div><h4>EXPLORE</h4><ul>
             <li><a href="#event">The Event</a></li><li><a href="#experiences">Experiences</a></li><li><a href="#gallery">Gallery</a></li>

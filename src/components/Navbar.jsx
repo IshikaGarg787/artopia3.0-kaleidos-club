@@ -57,6 +57,7 @@ export default function Navbar() {
       <header className={'nav' + (solid ? ' solid' : '')}>
         <div className="wrap nav-in">
           <a className="brand" href="#home" aria-label="Kaleidos × Artopia 3.0, back to top">
+            <img className="gla-mark" src="/images/gla-university-logo.png" alt="GLA University logo" />
             <img className="mark" src="/images/kaleidos-logo.png" alt="" aria-hidden="true" />
             <span>Kaleidos <i>×</i> Artopia <b>3.0</b></span>
           </a>

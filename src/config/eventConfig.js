@@ -29,12 +29,12 @@ export const CONFIG = {
     venue: 'GLA University',
     venueExact: 'KC Ground',
     deadline: '24 November 2026',
-    eligibility: 'College students from other universities are welcome to participate.',
+    eligibility: 'College students only.',
     format: '',
     fee: '₹49 per participant',
   },
   eventRules: [
-    { title: 'Art competition materials', detail: 'Paints, brushes, and canvases are provided. Participants may bring any additional art materials they need.' },
+    { title: 'Art competition materials', detail: 'Paints, brushes, and canvases will be provided. Participants may bring any additional art materials they need.' },
     { title: 'Prizes', items: [
       { label: '1st Position', value: '₹3,000' },
       { label: '2nd Position', value: '₹2,000' },
