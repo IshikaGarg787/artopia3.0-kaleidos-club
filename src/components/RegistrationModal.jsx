@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { EMAIL_DOMAIN, INTERESTS, YEARS, validateRegistration } from '../../shared/formOptions.js';
+import { INTERESTS, YEARS, validateRegistration } from '../../shared/formOptions.js';
+import { CONFIG } from '../config/eventConfig.js';
 import { submitRegistration } from '../lib/api.js';
 import WhatsAppBlock from './WhatsAppBlock.jsx';
 
 const LABELS = {
-  fullName: 'Full Name', rollNumber: 'University Roll Number', courseBranch: 'Course and Branch', currentYear: 'Current Year',
-  whatsapp: 'WhatsApp Number', email: 'Official University Email ID', interests: 'Interests', agreeWhatsapp: 'WhatsApp group confirmation',
+  fullName: 'Full Name', rollNumber: 'University Roll Number', collegeName: 'College / University', courseBranch: 'Course and Branch', currentYear: 'Current Year',
+  whatsapp: 'WhatsApp Number', email: 'Email ID', interests: 'Interests', transactionId: 'UPI Transaction ID', agreeWhatsapp: 'WhatsApp group confirmation',
 };
 const ORDER = Object.keys(LABELS);
 const toItems = (errs) => ORDER.filter((k) => errs[k]).map((k) => ({ name: k, label: LABELS[k], msg: errs[k] }));
 
-const EMPTY = { fullName: '', rollNumber: '', courseBranch: '', currentYear: '', whatsapp: '', email: '', interests: [], agreeWhatsapp: false, website: '' };
+const EMPTY = { fullName: '', rollNumber: '', collegeName: '', courseBranch: '', currentYear: '', whatsapp: '', email: '', interests: [], transactionId: '', agreeWhatsapp: false, website: '' };
 
 function Field({ id, label, required = true, hint, error, children }) {
   return (
@@ -33,6 +34,7 @@ export default function RegistrationModal({ onClose }) {
   const [banner, setBanner] = useState(null);   // { kind: 'duplicate' | 'error', title, text }
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [step, setStep] = useState(1);
   const boxRef = useRef(null);
   const scrollerRef = useRef(null);
   const formRef = useRef(null);
@@ -87,6 +89,21 @@ export default function RegistrationModal({ onClose }) {
     e.preventDefault();
     if (busy) return;
     setBanner(null);
+    if (step === 1) {
+      const { errors: formErrors } = validateRegistration({ ...values, transactionId: 'pending', agreeWhatsapp: true });
+      delete formErrors.transactionId;
+      if (Object.keys(formErrors).length) {
+        setErrors(formErrors); const items = toItems(formErrors);
+        setBanner({ kind: 'error', title: `${items.length} ${items.length === 1 ? 'thing needs' : 'things need'} fixing`, items }); focusFirstError(); return;
+      }
+      setBanner(null); setStep(2); return;
+    }
+    if (step === 2) {
+      const { errors: paymentErrors } = validateRegistration({ ...values, agreeWhatsapp: true });
+      const onlyPaymentErrors = Object.fromEntries(Object.entries(paymentErrors).filter(([key]) => key === 'transactionId'));
+      if (Object.keys(onlyPaymentErrors).length) { setErrors(onlyPaymentErrors); setBanner({ kind: 'error', title: 'Add your payment reference', items: toItems(onlyPaymentErrors) }); focusFirstError(); return; }
+      setBanner(null); setStep(3); return;
+    }
     const { errors: clientErrors } = validateRegistration(values);
     if (Object.keys(clientErrors).length) {
       setErrors(clientErrors);
@@ -148,13 +165,12 @@ export default function RegistrationModal({ onClose }) {
               <button type="button" className="btn btn-ghost btn-sm" onClick={copyId}>{copied ? 'Copied ✓' : 'Copy ID'}</button>
             </div>
             <p className="small">Please save this ID and keep your University Roll Number handy on the event day.</p>
-            <WhatsAppBlock />
             <button type="button" className="btn" onClick={onClose}>Done</button>
           </div>
         ) : (
           <form ref={formRef} onSubmit={onSubmit} noValidate>
-            <p className="tag">ARTOPIA 3.0 · REGISTRATION</p>
-            <h2 id="rf-title" className="disp rtitle">Enter the multiverse</h2>
+            <p className="tag">ARTOPIA 3.0 · STEP {step} OF 3</p>
+            <h2 id="rf-title" className="disp rtitle">{step === 1 ? 'Your details' : step === 2 ? 'Pay your entry fee' : 'Join the event group'}</h2>
             <p className="small">Fields marked <span className="req">*</span> are required.</p>
 
             {banner && (
@@ -175,12 +191,17 @@ export default function RegistrationModal({ onClose }) {
               </div>
             )}
 
+            {step === 1 && <>
             <Field id="rf-fullName" label="Full Name" error={errors.fullName}>
               <input {...a11y('fullName')} type="text" name="fullName" autoComplete="name" maxLength={80} value={values.fullName} onChange={(e) => setField('fullName', e.target.value)} placeholder="Your full name" />
             </Field>
 
             <Field id="rf-rollNumber" label="University Roll Number" hint="Please enter accurately" error={errors.rollNumber}>
-              <input {...a11y('rollNumber')} type="text" name="rollNumber" autoComplete="off" autoCapitalize="characters" maxLength={20} value={values.rollNumber} onChange={(e) => setField('rollNumber', e.target.value)} placeholder="Your university roll no" />
+              <input {...a11y('rollNumber')} type="text" name="rollNumber" autoComplete="off" autoCapitalize="characters" value={values.rollNumber} onChange={(e) => setField('rollNumber', e.target.value)} placeholder="Your university roll no" />
+            </Field>
+
+            <Field id="rf-collegeName" label="College / University Name" error={errors.collegeName}>
+              <input {...a11y('collegeName')} type="text" name="collegeName" maxLength={120} value={values.collegeName} onChange={(e) => setField('collegeName', e.target.value)} placeholder="Your college or university" />
             </Field>
 
             <Field id="rf-courseBranch" label="Course and Branch" error={errors.courseBranch}>
@@ -198,8 +219,8 @@ export default function RegistrationModal({ onClose }) {
               <input {...a11y('whatsapp')} type="tel" name="whatsapp" inputMode="tel" autoComplete="tel-national" maxLength={16} value={values.whatsapp} onChange={(e) => setField('whatsapp', e.target.value)} placeholder="10-digit mobile number" />
             </Field>
 
-            <Field id="rf-email" label="Official University Email ID" hint={EMAIL_DOMAIN ? `e.g., your_name@${EMAIL_DOMAIN}` : 'e.g., your_name@college.ac.in'} error={errors.email}>
-              <input {...a11y('email')} type="email" name="email" autoComplete="email" maxLength={120} value={values.email} onChange={(e) => setField('email', e.target.value)} placeholder={EMAIL_DOMAIN ? `your_name@${EMAIL_DOMAIN}` : 'your_name@college.ac.in'} />
+            <Field id="rf-email" label="Email ID" hint="Any valid email address is accepted" error={errors.email}>
+              <input {...a11y('email')} type="email" name="email" autoComplete="email" maxLength={120} value={values.email} onChange={(e) => setField('email', e.target.value)} placeholder="you@example.com" />
             </Field>
 
             <fieldset className="fld interests">
@@ -214,20 +235,23 @@ export default function RegistrationModal({ onClose }) {
               </div>
               {errors.interests && <p className="err" role="alert">{errors.interests}</p>}
             </fieldset>
+            </>}
 
+            {step === 2 && <>
+              <p className="small">Registration fee: <b>{CONFIG.details.fee}</b>. Pay using either QR code below, then enter the UPI transaction ID for verification.</p>
+              <div className="payment-grid">{CONFIG.registration.payments.map((p) => <div className="payment-card" key={p.qrImage}><img src={p.qrImage} alt={`Payment QR code for ${p.label}`} /><b>{p.label}</b></div>)}</div>
+              <Field id="rf-transactionId" label="UPI Transaction ID" hint="Enter the transaction reference shown by your UPI app" error={errors.transactionId}>
+                <input {...a11y('transactionId')} type="text" name="transactionId" maxLength={100} value={values.transactionId} onChange={(e) => setField('transactionId', e.target.value)} placeholder="UPI transaction ID" />
+              </Field>
+            </>}
+
+            {step === 3 && <>
             <WhatsAppBlock />
             <div className={'fld' + (errors.agreeWhatsapp ? ' has-err' : '')}>
-              <label className="agree" htmlFor="rf-agreeWhatsapp">
-                <input
-                  id="rf-agreeWhatsapp" type="checkbox" checked={values.agreeWhatsapp}
-                  aria-invalid={errors.agreeWhatsapp ? 'true' : undefined}
-                  aria-describedby={errors.agreeWhatsapp ? 'rf-agreeWhatsapp-e' : undefined}
-                  onChange={(e) => setField('agreeWhatsapp', e.target.checked)}
-                />
-                <span>I understand I must join the Artopia 3.0 WhatsApp group for event updates. <span className="req" aria-hidden="true">*</span></span>
-              </label>
+              <label className="agree" htmlFor="rf-agreeWhatsapp"><input id="rf-agreeWhatsapp" type="checkbox" checked={values.agreeWhatsapp} aria-invalid={errors.agreeWhatsapp ? 'true' : undefined} aria-describedby={errors.agreeWhatsapp ? 'rf-agreeWhatsapp-e' : undefined} onChange={(e) => setField('agreeWhatsapp', e.target.checked)} /><span>I have joined the WhatsApp group and agree to receive event updates. <span className="req" aria-hidden="true">*</span></span></label>
               {errors.agreeWhatsapp && <p className="err" id="rf-agreeWhatsapp-e" role="alert">{errors.agreeWhatsapp}</p>}
             </div>
+            </>}
 
             {/* honeypot: hidden from people, bots fill it in */}
             <div className="hp" aria-hidden="true">
@@ -235,8 +259,9 @@ export default function RegistrationModal({ onClose }) {
             </div>
 
             <button type="submit" className="btn rsubmit" disabled={busy}>
-              {busy ? (<><span className="spin" aria-hidden="true" /> Registering…</>) : 'Submit registration ↗'}
+              {busy ? (<><span className="spin" aria-hidden="true" /> Registering…</>) : step < 3 ? 'Continue →' : 'Complete registration ↗'}
             </button>
+            {step > 1 && <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setBanner(null); setStep(step - 1); }}>← Back</button>}
             <p className="small center">Your details are used only for Artopia 3.0 communication.</p>
           </form>
         )}

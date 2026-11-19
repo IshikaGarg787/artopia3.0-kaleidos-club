@@ -85,7 +85,7 @@ export default function Hero({ ready }) {
           <span className="ht-a" aria-hidden="true">{letters('ARTOPIA')}</span>
           <span className="ht-b" aria-hidden="true">{letters('3.0')}</span>
         </h1>
-        <p className="hero-sub comic">The Marvel Multiverse Edition</p>
+        <p className="hero-sub comic">Inter-University Art Festival</p>
         <p className="hero-head">Your universe.<br />Your masterpiece.</p>
         <p className="hero-copy">Step into a universe where imagination has no limits. Compete, create, explore, and let your art become legendary.</p>
         <div className="cta-row">

@@ -4,7 +4,7 @@
 // ============================================================================
 
 // Only emails ending with this domain are accepted. Use '' to accept ANY email.
-export const EMAIL_DOMAIN = 'gla.ac.in';
+export const EMAIL_DOMAIN = '';
 
 export const YEARS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 
@@ -50,9 +50,11 @@ export function validateRegistration(input) {
   else {
     const bad = [...rollNumber].filter((c) => !/[A-Z0-9/-]/.test(c));
     if (bad.length) errors.rollNumber = `Roll number contains characters that aren't allowed: ${quote(bad)}. Use only letters and numbers.`;
-    else if (rollNumber.length < 5) errors.rollNumber = `Roll number is too short: you entered ${rollNumber.length} character${rollNumber.length === 1 ? '' : 's'}, it needs at least 5. Please check it.`;
-    else if (rollNumber.length > 20) errors.rollNumber = `Roll number is too long: you entered ${rollNumber.length} characters, the maximum is 20.`;
   }
+
+  const collegeName = clean(src.collegeName);
+  if (!collegeName) errors.collegeName = 'Enter your college or university name.';
+  else if (collegeName.length > 120) errors.collegeName = 'College or university name must be 120 characters or fewer.';
 
   // ---- Course and branch
   const courseBranch = clean(src.courseBranch);
@@ -63,6 +65,10 @@ export function validateRegistration(input) {
     else if (courseBranch.length < 2) errors.courseBranch = 'Course and Branch is too short. Please enter a valid value.';
     else if (courseBranch.length > 60) errors.courseBranch = `Course and Branch is too long (${courseBranch.length} characters). The maximum is 60.`;
   }
+
+  const transactionId = clean(src.transactionId);
+  if (!transactionId) errors.transactionId = 'Enter your UPI transaction ID.';
+  else if (transactionId.length > 100) errors.transactionId = 'Transaction ID must be 100 characters or fewer.';
 
   // ---- Year
   const currentYear = clean(src.currentYear);
@@ -113,7 +119,7 @@ export function validateRegistration(input) {
   if (src.agreeWhatsapp !== true) errors.agreeWhatsapp = 'Please tick the checkbox to confirm you will join the Artopia 3.0 WhatsApp group.';
 
   return {
-    values: { fullName, rollNumber, courseBranch, currentYear, whatsapp, email, interests, agreedToWhatsappGroup: true },
+    values: { fullName, rollNumber, collegeName, courseBranch, currentYear, whatsapp, email, interests, transactionId, agreedToWhatsappGroup: true },
     errors,
   };
 }

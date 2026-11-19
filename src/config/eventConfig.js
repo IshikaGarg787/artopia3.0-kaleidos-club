@@ -16,21 +16,32 @@ export const CONFIG = {
       qrImage: '/images/whatsapp-qr.png',
       groupLink: 'https://chat.whatsapp.com/JnDWvnAqnjTDrTZan1WyRF',
     },
+    payments: [
+      { label: 'PhonePe · Madhavika Sisodiya', qrImage: '/images/codex-clipboard-503d58db-3585-43f7-80cf-4beedacae448.png' },
+      { label: 'UPI · Simran Sachdeva', qrImage: '/images/codex-clipboard-1d697bf7-24dc-4db5-9173-a18a20fe5b0b.png' },
+    ],
   },
 
   // ---- 2. EVENT FACTS ----------------------------------------------------
   // Leave a value as '' to display "To be announced".
   details: {
     date: '25 November 2026',
-    time: '[INSERT START AND END TIME]',
-    venue: 'GLA University, Mathura',
+    venue: 'GLA University',
     venueExact: 'KC Ground',
-    deadline: '[INSERT DEADLINE]',
-    eligibility: '[INSERT ELIGIBILITY]',
-    format: '[INSERT PARTICIPATION FORMAT]',
-    fee: '[INSERT CONFIRMED FEE]',
-    competition: '[INSERT COMPETITION DETAILS — rules, themes, categories, judging]',
+    deadline: '24 November 2026',
+    eligibility: 'College students from other universities are welcome to participate.',
+    format: '',
+    fee: '₹49 per participant',
   },
+  eventRules: [
+    { title: 'Art competition materials', detail: 'Paints, brushes, and canvases are provided. Participants may bring any additional art materials they need.' },
+    { title: 'Prizes', items: [
+      { label: '1st Position', value: '₹3,000' },
+      { label: '2nd Position', value: '₹2,000' },
+    ] },
+    { title: 'Games', detail: 'Various games will be held. Game participation fees will be announced at the venue.' },
+    { title: 'Shops and stalls', detail: 'Multiple shops and stalls will be set up during the event.' },
+  ],
 
   // ---- 3. VENUE MAP ------------------------------------------------------
   venueMap: {
@@ -80,35 +91,33 @@ export const CONFIG = {
   },
 
   // ---- 7. TIMELINE (structure only — confirm before launch) ------------------
-  timelineNote: 'This schedule is a placeholder structure. Final timings will be confirmed by the organizers.',
+  timelineNote: '',
   timeline: [
-    { time: '[TIME TBA]', title: 'Registrations open', desc: 'Fill in the registration form to secure your place.' },
-    { time: '[TIME TBA]', title: 'Event inauguration', desc: 'The portal opens and Artopia 3.0 begins.' },
-    { time: '[TIME TBA]', title: 'Competition sessions', desc: 'Creative competitions run through the day.' },
-    { time: '[TIME TBA]', title: 'Exhibition and stall exploration', desc: 'Explore the exhibits and stalls around campus.' },
-    { time: '[TIME TBA]', title: 'Closing ceremony', desc: 'Wrap-up and a last look at the day.' },
+    { time: '11:00 AM', title: 'On-site registration opens', desc: 'Participant registration begins at KC Ground.' },
+    { time: '12:00 PM', title: 'Event begins', desc: 'Competitions, games, and stalls open.' },
+    { time: '12:00–3:00 PM', title: 'Art competition', desc: 'Three hours to create your artwork.' },
+    { time: '4:00 PM', title: 'Results announced', desc: 'Winners of the art competition are announced.' },
+    { time: '5:00 PM', title: 'Event wrap-up', desc: 'The event concludes.' },
   ],
 
   // ---- 8. COORDINATORS --------------------------------------------------------
   // photo: '' shows a silhouette.  phone: '+91XXXXXXXXXX'   instagram: full https:// link
   coordinators: [
-    { name: '[Coordinator Name]', role: '[Faculty Coordinator]', photo: '', phone: '', email: '', instagram: '' },
-    { name: '[Coordinator Name]', role: '[Student Coordinator]', photo: '', phone: '', email: '', instagram: '' },
-    { name: '[Coordinator Name]', role: '[Event Coordinator]', photo: '', phone: '', email: '', instagram: '' },
+    { name: 'Silpakrishnan VS', role: 'Faculty Coordinator', photo: '/images/codex-clipboard-ef0ffd83-7d69-4623-8ce3-7ecd01c9dcbc.png', phone: '', email: '', instagram: '' },
+    { name: 'Aditya Anand', role: 'President', photo: '/images/aditya-anand.png', phone: '', email: '', instagram: '' },
+    { name: 'Vaibhav Rathour', role: 'Vice President', photo: '/images/codex-clipboard-abdaf4d4-2249-49b8-9c7a-1643adfa7fd7.png', phone: '', email: '', instagram: '' },
+    { name: 'Madhvika Sisodiya', role: 'Vice President', photo: '/images/codex-clipboard-9de23f45-3025-42b1-95b0-1fb109b6d9a8.png', phone: '', email: '', instagram: '' },
   ],
 
   // ---- 9. SOCIAL LINKS (full https:// URLs; empty = hidden) ---------------------
   social: { instagram: 'https://www.instagram.com/kaleidos.glau?srtk=bzh2bnN0bmhvYWR5', youtube: '', linkedin: '', facebook: '' },
 
   // ---- 10. FAQ ------------------------------------------------------------------
-  faqFallback: 'Please refer to the registration form or contact the organizers for confirmation.',
+  faqFallback: 'Contact an event coordinator for help.',
   faq: [
-    { q: 'Who can participate?', a: '' },
-    { q: 'How do I register?', a: 'Tap any “Register now” button on this page, fill in the form and submit. You will see a confirmation with your registration ID.' },
-    { q: 'Is there a registration fee?', a: '' },
-    { q: 'Can students from other colleges attend?', a: 'Artopia brings together creative minds from different colleges. For specific eligibility, please contact the organizers.' },
-    { q: 'What should participants bring?', a: '' },
-    { q: 'Where and when is the event?', a: '' },
-    { q: 'Who can I contact for help?', a: '' },
+    { q: 'How do I register?', a: 'Complete the online form, follow the payment step, enter your UPI transaction ID, join the event WhatsApp group, and submit to receive your registration ID.' },
+    { q: 'How do I verify my payment?', a: 'Pay using either QR code in the registration form and enter the transaction ID shown by your UPI app.' },
+    { q: 'Where can I find event updates?', a: 'The registration form shows the WhatsApp group QR code and joining link before you submit.' },
+    { q: 'Who can I contact for help?', a: 'Contact Abhinna Singh at +91 7897740582, Arpit Gupta at +91 8865930678, or Simran Sachdeva at +91 8795961912.' },
   ],
 };

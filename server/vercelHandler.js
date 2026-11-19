@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Registration from './models/Registration.js';
+import Registration, { prepareRegistrationIndexes } from './models/Registration.js';
 import { createApp } from './app.js';
 
 const app = createApp({ Registration });
@@ -11,7 +11,7 @@ async function connectDatabase() {
     const uri = process.env.MONGODB_URI;
     if (!uri) throw new Error('MONGODB_URI is not configured.');
     connection = mongoose.connect(uri, { serverSelectionTimeoutMS: 10000 })
-      .then(() => Registration.init())
+      .then(() => prepareRegistrationIndexes())
       .catch((error) => { connection = null; throw error; });
   }
   await connection;

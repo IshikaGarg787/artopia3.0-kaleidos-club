@@ -5,8 +5,7 @@ import Val from '../Val.jsx';
 export default function Briefing() {
   const D = CONFIG.details;
   const panels = [
-    ['Date', D.date], ['Time', D.time], ['Venue', [D.venueExact, D.venue].filter(Boolean).join(', ')],
-    ['Registration deadline', D.deadline], ['Eligibility', D.eligibility], ['Participation format', D.format], ['Entry fee', D.fee],
+    ['Registration deadline', D.deadline], ['Eligibility', D.eligibility], ['Art competition fee', D.fee],
   ];
   return (
     <section className="brief" id="briefing" aria-labelledby="b-h">
@@ -17,8 +16,20 @@ export default function Briefing() {
           {panels.map(([k, v], i) => (
             <div className="panel rv" key={k} style={{ '--d': (i % 3) * 80 + 'ms' }}><span className="scan" /><dt>{k}</dt><dd><Val v={v} /></dd></div>
           ))}
-          <div className="panel wide rv"><span className="scan" /><dt>Competition details</dt><dd><Val v={D.competition} /></dd></div>
         </dl>
+        <div className="brief-rules">
+          <h3 className="tag">EVENT RULES & DETAILS</h3>
+          <dl className="hud">
+            {CONFIG.eventRules.map((rule, i) => (
+              <div className="panel rv" key={rule.title} style={{ '--d': (i % 3) * 80 + 'ms' }}>
+                <span className="scan" /><dt>{rule.title}</dt>
+                <dd className={rule.items ? 'prize-list' : undefined}>
+                  {rule.items ? rule.items.map((item) => <div className="prize-row" key={item.label}><span>{item.label}</span><span>{item.value}</span></div>) : rule.detail}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

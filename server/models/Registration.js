@@ -4,17 +4,34 @@ const registrationSchema = new mongoose.Schema(
   {
     registrationId: { type: String, required: true, unique: true },
     fullName: { type: String, required: true, trim: true, maxlength: 80 },
-    // unique => the same roll number can never be saved twice
-    rollNumber: { type: String, required: true, unique: true, uppercase: true, trim: true },
+    // Roll numbers can repeat across universities; collegeName identifies the institution.
+    rollNumber: { type: String, required: true, uppercase: true, trim: true },
+    collegeName: { type: String, required: true, trim: true, maxlength: 120 },
     courseBranch: { type: String, required: true, trim: true, maxlength: 60 },
     currentYear: { type: String, required: true },
     whatsapp: { type: String, required: true },
     // unique => the same email can never be saved twice
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    transactionId: { type: String, required: true, trim: true, maxlength: 100 },
     interests: { type: [String], default: [] },
     agreedToWhatsappGroup: { type: Boolean, required: true },
   },
-  { timestamps: true } // adds createdAt / updatedAt automatically
+  { timestamps: true, autoIndex: false } // indexes are managed explicitly during startup
 );
 
-export default mongoose.models.Registration || mongoose.model('Registration', registrationSchema);
+const Registration = mongoose.models.Registration || mongoose.model('Registration', registrationSchema);
+export default Registration;
+
+/** Remove the legacy unique roll-number index without changing registration data. */
+export async function prepareRegistrationIndexes() {
+  const indexes = await Registration.collection.listIndexes().toArray().catch((error) => {
+    if (error.codeName === 'NamespaceNotFound') return [];
+    throw error;
+  });
+  const legacy = indexes.find((index) => index.unique && index.key?.rollNumber === 1 && Object.keys(index.key).length === 1);
+  if (legacy) await Registration.collection.dropIndex(legacy.name);
+  await Promise.all([
+    Registration.collection.createIndex({ registrationId: 1 }, { unique: true }),
+    Registration.collection.createIndex({ email: 1 }, { unique: true }),
+  ]);
+}

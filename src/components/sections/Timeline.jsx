@@ -17,11 +17,11 @@ export default function Timeline() {
       <div className="wrap sec">
         <p className="tag rv">THE TIMELINE</p>
         <SplitHeading id="s-h" style={{ marginTop: 14 }} parts={[['How the day unfolds']]} />
-        <p className="note rv">{CONFIG.timelineNote}</p>
+        {CONFIG.timelineNote && <p className="note rv">{CONFIG.timelineNote}</p>}
         <ol className="tl" ref={tl} style={{ listStyle: 'none', marginBottom: 0 }}>
           {CONFIG.timeline.map((t) => (
             <li className="tl-item" key={t.title}>
-              <span className="tl-time">{isPH(t.time) ? <span className="ph">{t.time}</span> : t.time || 'Time to be announced'}</span>
+              {t.time && <span className="tl-time">{isPH(t.time) ? <span className="ph">{t.time}</span> : t.time}</span>}
               <h3>{t.title}</h3><p>{t.desc}</p>
             </li>
           ))}
