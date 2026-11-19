@@ -36,22 +36,24 @@ export default function App() {
       <a className="skip" href="#main">Skip to content</a>
       <div className="grain" aria-hidden="true" />
       <CursorLight />
-      <Navbar />
-      <ScrollWidgets />
-      <main id="main">
-        <Hero ready={ready} />
-        <Transmission />
-        <Experiences />
-        <WhyAttend />
-        <Gallery />
-        <Briefing />
-        <Timeline />
-        <Venue />
-        <Coordinators />
-        <Faq />
-        <FinalCta />
-      </main>
-      <Footer />
+      <div className="doom-site">
+        <Navbar />
+        <ScrollWidgets />
+        <main id="main" className="doom-page">
+          <Hero ready={ready} />
+          <Transmission />
+          <Experiences />
+          <WhyAttend />
+          <Gallery />
+          <Briefing />
+          <Timeline />
+          <Venue />
+          <Coordinators />
+          <Faq />
+          <FinalCta />
+        </main>
+        <Footer />
+      </div>
     </RegistrationProvider>
   );
 }

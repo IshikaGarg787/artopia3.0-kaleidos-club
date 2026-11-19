@@ -475,3 +475,61 @@ body.lock{overflow:hidden}
   .rsubmit{font-size:1rem}
   .payment-grid{grid-template-columns:minmax(0,1fr)}
 }
+
+/* ---------- DOOMSDAY MAIN SITE THEME (keeps the intro/preloader untouched) ---------- */
+.doom-site{--doom-green:#b0ed39;--doom-deep:#07130e;--doom-ember:#e8412c;--doom-gold:#f5bf42;background:#050706}
+.doom-site .nav.solid{background:rgba(4,8,7,.9);border-color:rgba(176,237,57,.22)}
+.doom-site .nav-ind{background:linear-gradient(90deg,var(--doom-green),var(--doom-ember));box-shadow:0 0 12px rgba(176,237,57,.6)}
+.doom-page{background:#050706}
+.doom-page .hero{background-color:#050706;background-image:linear-gradient(180deg,rgba(3,7,7,.28),rgba(3,7,7,.48) 56%,#050706 100%),url('/images/doomsday-artwork.jpg');background-size:cover;background-position:center 25%}
+.doom-page .hero #portal{opacity:.24;mix-blend-mode:screen}
+.doom-page .hero .vignette{background:radial-gradient(ellipse at 50% 42%,rgba(4,8,7,.05) 5%,rgba(4,8,7,.36) 58%,rgba(4,8,7,.88) 100%),linear-gradient(transparent 48%,#050706 100%)}
+.doom-page .hero .halftone{opacity:.22}
+.doom-page .ht-a{color:#f4ead0;text-shadow:.035em .035em 0 #8f1c15,0 0 50px rgba(245,191,66,.32)}
+.doom-page .ht-b{color:var(--doom-ember);text-shadow:.045em .04em 0 #270d09,0 0 36px rgba(232,65,44,.5)}
+.doom-page .hero-sub{color:var(--doom-green);text-shadow:0 0 22px rgba(176,237,57,.58)}
+.doom-page .hero-head{text-shadow:0 2px 22px #050706}
+.doom-page .hero .cta-row .btn:first-child{--bg:linear-gradient(105deg,#a91e17,#e74725 58%,#f1b934)}
+.doom-page .hero .btn-ghost{box-shadow:inset 0 0 0 1px rgba(245,191,66,.58);color:#fff5dc}
+.doom-page .info-strip{border-color:rgba(176,237,57,.26);background:rgba(3,7,6,.82)}
+.doom-page .info-strip>div{border-color:rgba(176,237,57,.18)}
+.doom-page .info-strip dt{color:var(--doom-green)}
+.doom-page .trans{background:radial-gradient(ellipse at 75% 35%,rgba(31,94,57,.28),transparent 48%),linear-gradient(180deg,#050706,#08120d 52%,#050706)}
+.doom-page .grid3d{background-image:linear-gradient(rgba(115,172,63,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(115,172,63,.27) 1px,transparent 1px);opacity:.24}
+.doom-page .trans .h2 .acc{-webkit-text-stroke-color:var(--doom-green)}
+.doom-page .marquee{border-color:rgba(176,237,57,.2);background:rgba(4,8,7,.84)}
+.doom-page .exp,.doom-page .team,.doom-page .tl-sec{background:radial-gradient(ellipse at 50% 0,rgba(20,52,34,.28),transparent 56%),#050706}
+.doom-page .why{background:linear-gradient(145deg,#050706,#11170d 48%,#080a08)}
+.doom-page .gal{background:linear-gradient(180deg,#090d0b,#10150f 50%,#060807)}
+.doom-page .brief{background:radial-gradient(ellipse at 80% 0,rgba(44,78,37,.35),transparent 60%),#060807}
+.doom-page .venue{background:linear-gradient(180deg,#050706,#0b1510);overflow:hidden}
+.doom-page .venue::before{content:"";position:absolute;inset:0 0 auto;height:clamp(220px,22vw,320px);background:url('/images/doom-ink-heads.jpg') center/100% 100% no-repeat;filter:grayscale(1) contrast(1.35);mix-blend-mode:screen;opacity:.62;mask-image:linear-gradient(#000 0%,#000 58%,transparent 100%);pointer-events:none}
+.doom-page .venue>.wrap{position:relative;z-index:1}
+.doom-page .venue .v-card{background:rgba(4,7,5,.78);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);box-shadow:0 18px 60px rgba(0,0,0,.4)}
+.doom-page .faq{background:linear-gradient(180deg,#070a08,#11140d 55%,#060807)}
+.doom-page .xp,.doom-page .co{background:linear-gradient(155deg,#131a12,#090c09 74%);border-color:rgba(176,237,57,.2)}
+.doom-page .xp-body h3{color:color-mix(in srgb,var(--acc) 62%,var(--doom-gold))}
+.doom-page .xp .kind{filter:saturate(.82)}
+.doom-page .panel{background:linear-gradient(150deg,rgba(47,83,39,.2),rgba(5,8,6,.84));border-color:rgba(176,237,57,.22)}
+.doom-page .panel::before,.doom-page .panel::after{border-color:var(--doom-green)}
+.doom-page .panel .scan{background:linear-gradient(transparent,rgba(176,237,57,.1),transparent)}
+.doom-page .panel dt,.doom-page .brief-rules>.tag{color:var(--doom-green)}
+.doom-page .tl::after{background:linear-gradient(var(--doom-green),var(--doom-ember));box-shadow:0 0 14px rgba(176,237,57,.55)}
+.doom-page .tl-item.on::before{border-color:var(--doom-green);background:var(--doom-green);box-shadow:0 0 18px rgba(176,237,57,.72)}
+.doom-page .tl-time{color:#f5bf42}
+.doom-page .co:hover{border-color:var(--doom-gold)}
+.doom-page .co-b .role{color:var(--doom-green)}
+.doom-page .v-card,.doom-page .v-map{border-color:rgba(176,237,57,.24);background-color:#080d0a}
+.doom-page .q.open .pm{background:var(--doom-ember);border-color:var(--doom-ember)}
+.doom-page .final{background:radial-gradient(circle at 50% 50%,rgba(49,81,35,.46),rgba(25,13,9,.4) 40%,#050706 72%)}
+.doom-page .final .h2{text-shadow:0 0 56px rgba(176,237,57,.34)}
+.doom-page .foot{background:#030504;border-color:rgba(176,237,57,.2)}
+.doom-site .foot h4{color:var(--doom-green)}
+.doom-site .foot .big span{color:var(--doom-ember)!important}
+.doom-page .why,.doom-page .brief,.doom-page .faq{isolation:isolate}
+.doom-page .why::after,.doom-page .brief::after,.doom-page .faq::after{content:"";position:absolute;z-index:0;top:8%;bottom:8%;width:min(30vw,390px);pointer-events:none;background-repeat:no-repeat;background-size:contain;background-position:center;opacity:.13;mix-blend-mode:screen;mask-image:radial-gradient(ellipse,#000 34%,rgba(0,0,0,.6) 58%,transparent 78%)}
+.doom-page .why::after{right:-2%;background-image:url('/images/doom-hulk-head.jpg')}
+.doom-page .brief::after{left:-3%;background-image:url('/images/doom-mask-head.jpg');opacity:.1}
+.doom-page .faq::after{right:-1%;background-image:url('/images/doom-iron-head.jpg');opacity:.15}
+.doom-page .why>.wrap,.doom-page .brief>.wrap,.doom-page .faq>.wrap{position:relative;z-index:1}
+@media(max-width:700px){.doom-page .hero{background-position:center 34%}}
