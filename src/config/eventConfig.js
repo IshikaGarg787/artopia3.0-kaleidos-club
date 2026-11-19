@@ -17,8 +17,8 @@ export const CONFIG = {
       groupLink: 'https://chat.whatsapp.com/JnDWvnAqnjTDrTZan1WyRF',
     },
     payments: [
-      { label: 'PhonePe · Madhavika Sisodiya', qrImage: '/images/codex-clipboard-503d58db-3585-43f7-80cf-4beedacae448.png' },
-      { label: 'UPI · Simran Sachdeva', qrImage: '/images/codex-clipboard-1d697bf7-24dc-4db5-9173-a18a20fe5b0b.png' },
+      { qrImage: '/images/codex-clipboard-503d58db-3585-43f7-80cf-4beedacae448.png' },
+      { qrImage: '/images/codex-clipboard-1d697bf7-24dc-4db5-9173-a18a20fe5b0b.png' },
     ],
   },
 
@@ -106,7 +106,7 @@ export const CONFIG = {
     { name: 'Silpakrishnan VS', role: 'Faculty Coordinator', photo: '/images/codex-clipboard-ef0ffd83-7d69-4623-8ce3-7ecd01c9dcbc.png', phone: '', email: '', instagram: '' },
     { name: 'Aditya Anand', role: 'President', photo: '/images/aditya-anand.png', phone: '', email: '', instagram: '' },
     { name: 'Vaibhav Rathour', role: 'Vice President', photo: '/images/codex-clipboard-abdaf4d4-2249-49b8-9c7a-1643adfa7fd7.png', phone: '', email: '', instagram: '' },
-    { name: 'Madhvika Sisodiya', role: 'Vice President', photo: '/images/codex-clipboard-9de23f45-3025-42b1-95b0-1fb109b6d9a8.png', phone: '', email: '', instagram: '' },
+    { name: 'Madhavika Sisodia', role: 'Vice President', photo: '/images/codex-clipboard-9de23f45-3025-42b1-95b0-1fb109b6d9a8.png', phone: '', email: '', instagram: '' },
   ],
 
   // ---- 9. SOCIAL LINKS (full https:// URLs; empty = hidden) ---------------------
@@ -115,8 +115,8 @@ export const CONFIG = {
   // ---- 10. FAQ ------------------------------------------------------------------
   faqFallback: 'Contact an event coordinator for help.',
   faq: [
-    { q: 'How do I register?', a: 'Complete the online form, follow the payment step, enter your UPI transaction ID, join the event WhatsApp group, and submit to receive your registration ID.' },
-    { q: 'How do I verify my payment?', a: 'Pay using either QR code in the registration form and enter the transaction ID shown by your UPI app.' },
+    { q: 'How do I register?', a: 'Complete the online form, follow the payment step, enter your 12-digit UTR number, join the event WhatsApp group, and submit to receive your registration ID.' },
+    { q: 'How do I verify my payment?', a: 'Pay using either QR code in the registration form and enter the 12-digit UTR number shown by your UPI app.' },
     { q: 'Where can I find event updates?', a: 'The registration form shows the WhatsApp group QR code and joining link before you submit.' },
     { q: 'Who can I contact for help?', a: 'Contact Abhinna Singh at +91 7897740582, Arpit Gupta at +91 8865930678, or Simran Sachdeva at +91 8795961912.' },
   ],

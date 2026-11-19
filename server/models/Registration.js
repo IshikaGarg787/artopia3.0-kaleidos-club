@@ -12,7 +12,7 @@ const registrationSchema = new mongoose.Schema(
     whatsapp: { type: String, required: true },
     // unique => the same email can never be saved twice
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    transactionId: { type: String, required: true, trim: true, maxlength: 100 },
+    transactionId: { type: String, required: true, trim: true, minlength: 12, maxlength: 12 },
     interests: { type: [String], default: [] },
     agreedToWhatsappGroup: { type: Boolean, required: true },
   },

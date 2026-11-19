@@ -26,7 +26,7 @@ export default function Footer() {
             {social.length ? social.map((k) => <li key={k}><a href={CONFIG.social[k]} target="_blank" rel="noopener noreferrer">{NAMES[k] || k}</a></li>) : soon('Social links coming soon')}
           </ul></div>
           <div><h4>CONTACT</h4><ul>
-            {CONTACTS.map(([name, phone]) => <li key={name}><a href={`tel:${phone.replace(/\s/g, '')}`}>{name}: {phone}</a>{name === 'Simran Sachdeva' && <span style={{display:'block', color:'var(--mut)', fontSize:'.82rem'}}>Yamuna Hostel · Room 3003</span>}</li>)}
+            {CONTACTS.map(([name, phone]) => <li key={name}><a href={`tel:${phone.replace(/\s/g, '')}`}>{name}: {phone}</a></li>)}
           </ul></div>
         </div>
         <small>© {new Date().getFullYear()} KALEIDOS — Fine Arts Club, GLA University. Artopia 3.0 is an independently organized university event with a Marvel-inspired creative theme. It is not an official Marvel or Disney production and is not affiliated with, endorsed or sponsored by Marvel Entertainment or The Walt Disney Company. All artwork on this page is original.</small>

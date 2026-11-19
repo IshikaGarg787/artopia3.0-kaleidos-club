@@ -6,7 +6,7 @@ import WhatsAppBlock from './WhatsAppBlock.jsx';
 
 const LABELS = {
   fullName: 'Full Name', rollNumber: 'University Roll Number', collegeName: 'College / University', courseBranch: 'Course and Branch', currentYear: 'Current Year',
-  whatsapp: 'WhatsApp Number', email: 'Email ID', interests: 'Interests', transactionId: 'UPI Transaction ID', agreeWhatsapp: 'WhatsApp group confirmation',
+  whatsapp: 'WhatsApp Number', email: 'Email ID', interests: 'Interests', transactionId: 'UTR Number', agreeWhatsapp: 'WhatsApp group confirmation',
 };
 const ORDER = Object.keys(LABELS);
 const toItems = (errs) => ORDER.filter((k) => errs[k]).map((k) => ({ name: k, label: LABELS[k], msg: errs[k] }));
@@ -238,10 +238,10 @@ export default function RegistrationModal({ onClose }) {
             </>}
 
             {step === 2 && <>
-              <p className="small">Registration fee: <b>{CONFIG.details.fee}</b>. Pay using either QR code below, then enter the UPI transaction ID for verification.</p>
-              <div className="payment-grid">{CONFIG.registration.payments.map((p) => <div className="payment-card" key={p.qrImage}><img src={p.qrImage} alt={`Payment QR code for ${p.label}`} /><b>{p.label}</b></div>)}</div>
-              <Field id="rf-transactionId" label="UPI Transaction ID" hint="Enter the transaction reference shown by your UPI app" error={errors.transactionId}>
-                <input {...a11y('transactionId')} type="text" name="transactionId" maxLength={100} value={values.transactionId} onChange={(e) => setField('transactionId', e.target.value)} placeholder="UPI transaction ID" />
+              <p className="small">Registration fee: <b>{CONFIG.details.fee}</b>. Pay using either QR code below, then enter the 12-digit UTR number for verification.</p>
+              <div className="payment-grid">{CONFIG.registration.payments.map((p, i) => <div className="payment-card" key={p.qrImage}><img src={p.qrImage} alt={`Payment QR code option ${i + 1}`} /></div>)}</div>
+              <Field id="rf-transactionId" label="UTR Number" hint="Enter the 12-digit UTR number from your UPI payment" error={errors.transactionId}>
+                <input {...a11y('transactionId')} type="text" name="transactionId" inputMode="numeric" maxLength={12} value={values.transactionId} onChange={(e) => setField('transactionId', e.target.value.replace(/\D/g, '').slice(0, 12))} placeholder="12-digit UTR number" />
               </Field>
             </>}
 

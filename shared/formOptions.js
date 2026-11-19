@@ -67,8 +67,7 @@ export function validateRegistration(input) {
   }
 
   const transactionId = clean(src.transactionId);
-  if (!transactionId) errors.transactionId = 'Enter your UPI transaction ID.';
-  else if (transactionId.length > 100) errors.transactionId = 'Transaction ID must be 100 characters or fewer.';
+  if (!/^\d{12}$/.test(transactionId)) errors.transactionId = 'UTR number must contain exactly 12 digits.';
 
   // ---- Year
   const currentYear = clean(src.currentYear);
