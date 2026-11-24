@@ -8,7 +8,7 @@ export const CONFIG = {
   // ---- 1. REGISTRATION ---------------------------------------------------
   registration: {
     // "open" | "soon" | "closed"  ("closed" disables every Register button)
-    status: 'open',
+    status: 'closed',
     // Optional extra line next to the status, e.g. "Closes 20 Nov". "" hides it.
     announcement: '',
     // WhatsApp group shown inside the registration form and on the success screen.
