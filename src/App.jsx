@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { RegistrationProvider } from './context/RegistrationContext.jsx';
 import Preloader from './components/Preloader.jsx';
 import Navbar from './components/Navbar.jsx';
@@ -54,6 +55,7 @@ export default function App() {
         </main>
         <Footer />
       </div>
+      <Analytics />
     </RegistrationProvider>
   );
 }
